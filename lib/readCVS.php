@@ -20,12 +20,11 @@ function readCSV($fileIn) {
     return $data;
 }
 
-// Example usage:
 $csvFile = "your_file.csv";
 $data = readCSV($csvFile);
 if (!is_array($data)) {
-    echo $data; // Print the error message
+    echo $data;
 } else {
-    print_r($data); // Print the CSV data as an array
+    print_r($data);
 }
 ?>
