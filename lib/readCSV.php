@@ -20,7 +20,7 @@ function readCSV($fileIn) {
     return $data;
 }
 
-$csvFile = "your_file.csv";
+$csvFile = "";
 $data = readCSV($csvFile);
 if (!is_array($data)) {
     echo $data;

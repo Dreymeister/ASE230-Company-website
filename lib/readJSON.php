@@ -15,7 +15,7 @@ function readJSON($fileIn) {
     return $jsonData;
 }
 
-$jsonFile = "your_file.json";
+$jsonFile = "";
 $data = readJSON($jsonFile);
 
 if ($data !== null) {
