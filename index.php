@@ -6,6 +6,105 @@
     $overview = readPlain('./data/overview.txt');
     $missionStatement = readPlain('./data/mission.txt');
     $team = readCSV('./data/team.csv');
+    $json = readJSON('./data/data.json');
+    $awards = $json['awards'];
+    $products = $json['products'];
+    $count = 0;
+
+    function leftProduct($productName, $productData){
+        echo '<div class="row align-items-center mb-5">
+                        <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
+                            <h2 class="mb-4">'.$productName.'</h2>
+                            <p class="text-muted">'.$productData['description'].'</p>
+                            <p class="">Applications</p>
+                                <ul class="text-muted mb-5">';
+                                    foreach($productData['applications'] as $application => $description){
+                                        echo '<li class="mb-2">'.$application.': '.$description.'</li>';
+                                    }
+                                echo '</ul>
+                            <a href="javascript: void(0);" class="btn btn-primary">Find out more <i class="icon-xs ms-2" data-feather="arrow-right"></i></a>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-md-6 ms-md-auto order-1 order-md-2">
+                            <div class="position-relative">
+                                <div class="ms-5 features-img">
+                                    <img src="images/features-1.jpg" alt="" class="img-fluid d-block mx-auto rounded shadow" />
+                                </div>
+                                <img src="images/dot-img.png" alt="" class="dot-img-left" />
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div> 
+                    <!-- end row -->';
+    }
+
+    function rightProduct($productName, $productData){
+        echo '<div class="row align-items-center section">
+                            <div class="col-md-6">
+                                <div class="position-relative mb-md-0 mb-5">
+                                    <div class="me-5 features-img">
+                                        <img src="images/features-2.jpg" alt="" class="img-fluid d-block mx-auto rounded shadow" />
+                                    </div>
+                                    <img src="images/dot-img.png" alt="" class="dot-img-right" />
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-md-5 ms-md-auto">
+                            <h2 class="mb-4">'.$productName.'</h2>
+                            <p class="text-muted">'.$productData['description'].'</p>
+                            <p class="">Applications</p>
+                                <ul class="text-muted mb-5">';
+                                    foreach($productData['applications'] as $application => $description){
+                                        echo '<li class="mb-2">'.$application.': '.$description.'</li>';
+                                    }
+                                echo '</ul>
+                                <a href="javascript: void(0);" class="btn btn-primary">Find out more <i class="icon-xs ms-2" data-feather="arrow-right"></i></a>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->';
+    }
+
+    function memberCard($memberArr){
+        echo '
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
+                            <div class="position-relative overflow-hidden">
+                                <img src="'.$memberArr['img'].'" alt="" class="img-fluid d-block mx-auto" />
+                                <ul class="list-inline p-3 mb-0 team-social-item">
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-4">
+                                <h5 class="font-size-19 mb-1">'.$memberArr['name'].'</h5>
+                                <p class="text-secondary text-uppercase font-size-14 mb-0">'.$memberArr['role'].'</p>
+                                <p class="text-muted small">'.$memberArr['description'].'</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col -->';
+    }
+
+    function awardCard($awardArr){
+        echo '<div class="col-lg-3">
+                        <div class="card mt-4 border-0 shadow h-100">
+                            <div class="card-body p-4">
+                                <div class="mx-auto text-center">
+                                    <span class="badge badge-soft-primary">'.$awardArr['year'].'</span>
+                                </div>
+                                <h4 class="font-size-22 my-4"><a href="javascript: void(0);">'.$awardArr['description'].'</a></h4>
+                            </div><!-- end cardbody -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->';
+    }
 ?>
 
 
@@ -13,7 +112,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Qexal - Responsive Bootstrap 5 Landing Page Template</title>
+        <title>Orion Aerospace Dynamics</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
         <meta name="keywords" content="bootstrap 5, premium, marketing, multipurpose" />
@@ -99,71 +198,26 @@
             <div class="container">
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-7 text-center">
-                        <h2 class="fw-bold">Our Features</h2>
-                        <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem ab illo inventore.</p>
+                        <h2 class="fw-bold">Our Products & Services</h2>
                     </div>
                     <!-- end col -->
                 </div>
                 <!-- end row -->
-                <div class="row align-items-center mb-5">
-                    <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4">Perfect Solution For Small Businesses</h2>
-                        <p class="text-muted mb-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis..</p>
-                        <a href="javascript: void(0);" class="btn btn-primary">Find out more <i class="icon-xs ms-2" data-feather="arrow-right"></i></a>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-md-6 ms-md-auto order-1 order-md-2">
-                        <div class="position-relative">
-                            <div class="ms-5 features-img">
-                                <img src="images/features-1.jpg" alt="" class="img-fluid d-block mx-auto rounded shadow" />
-                            </div>
-                            <img src="images/dot-img.png" alt="" class="dot-img-left" />
-                        </div>
-                    </div>
-                    <!-- end col -->
-                </div> 
-                <!-- end row -->
-                <div class="row align-items-center section pb-0">
-                    <div class="col-md-6">
-                        <div class="position-relative mb-md-0 mb-5">
-                            <div class="me-5 features-img">
-                                <img src="images/features-2.jpg" alt="" class="img-fluid d-block mx-auto rounded shadow" />
-                            </div>
-                            <img src="images/dot-img.png" alt="" class="dot-img-right" />
-                        </div>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-md-5 ms-md-auto">
-                        <h2 class="mb-4">Build community & conversion with our suite of social tool</h2>
-                        <p class="text-muted mb-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis..</p>
-                        <a href="javascript: void(0);" class="btn btn-primary">Find out more <i class="icon-xs ms-2" data-feather="arrow-right"></i></a>
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
+                <?php 
+                $count = 0;
+                foreach($products as $product => $data){
+                    if($count%2 == 0){
+                        leftProduct($product, $data);
+                    } else {
+                        rightProduct($product, $data);
+                    }
+                    $count++;
+                }
+                ?>
             </div>
             <!-- end container -->
         </section>
         <!-- Features end -->
-
-        <section class="section bg-gradient-primary">
-            <div class="bg-overlay-img" style="background-image: url(images/demos.png);"></div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="text-center">
-                            <h1 class="text-white mb-4">Build your dream website today</h1>
-                            <p class="text-white mb-5 font-size-16">Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totamrem aperiam eaque inventore veritatis quasi.</p>
-                            <a href="#" class="btn btn-lg btn-light">Ask for Demonstration</a>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- Cta end -->
 
         <!-- Team start -->
         <section class="section bg-light" id="team">
@@ -175,103 +229,10 @@
                     <!-- end col -->
                 </div>
                 <!-- end row -->
-                <?php print_r($team);?>
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/1.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">Frances Thompson</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/2.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">John Jones</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Ceo</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/3.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">Della Hobbs</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/4.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">Troy Jordon</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
+                <div class="row justify-content-center">
+                <?php foreach($team as $member){
+                    memberCard($member);
+                };?>
                 </div>
                 <!-- end row -->
             </div>
@@ -284,102 +245,19 @@
             <div class="container">
                 <div class="row justify-content-center mb-4">
                     <div class="col-lg-7 text-center">
-                        <h2 class="fw-bold">Our Blog</h2>
-                        <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem ab illo inventore.</p>
+                        <h2 class="fw-bold">Our Awards</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card mt-4 border-0 shadow">
-                            <div class="card-body p-4">
-                                <span class="badge badge-soft-primary">UI & UX Design</span>
-                                <h4 class="font-size-22 my-4"><a href="javascript: void(0);">Step bt step to conduct usability testing</a></h4>
-                                <p class="text-muted">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                                <div class="d-flex align-items-center mt-4 pt-2">
-                                    <img src="images/user/img-2.jpg" class="rounded-circle avatar-sm me-3" alt="..." />
-                                    <div class="flex-body">
-                                        <h5 class="font-size-17 mb-0">John Yeager</h5>
-                                        <p class="text-muted mb-0 font-size-14">Designer, New York</p>
-                                    </div>
-                                </div>
-                            </div><!-- end cardbody -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card mt-4 border-0 shadow">
-                            <div class="card-body p-4">
-                                <span class="badge badge-soft-primary">CEO</span>
-                                <h4 class="font-size-22 my-4"><a href="javascript: void(0);">Increase conversion rate from ad to landing page</a></h4>
-                                <p class="text-muted">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                                <div class="d-flex align-items-center mt-4 pt-2">
-                                    <img src="images/user/img-3.jpg" class="rounded-circle avatar-sm me-3" alt="..." />
-                                    <div class="flex-body">
-                                        <h5 class="font-size-17 mb-0">Berneice Harris</h5>
-                                        <p class="text-muted mb-0 font-size-14">Designer, New York</p>
-                                    </div>
-                                </div>
-                            </div><!-- end cradbody -->
-                        </div><!-- end card -->
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card mt-4 border-0 shadow">
-                            <div class="card-body p-4">
-                                <span class="badge badge-soft-primary">Developer</span>
-                                <h4 class="font-size-22 my-4"><a href="javascript: void(0);">Why small business should start marketing</a></h4>
-                                <p class="text-muted">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                                <div class="d-flex align-items-center mt-4 pt-2">
-                                    <img src="images/user/img-1.jpg" class="rounded-circle avatar-sm me-3" alt="..." />
-                                    <div class="flex-body">
-                                        <h5 class="font-size-17 mb-0">Sarah Pettway</h5>
-                                        <p class="text-muted mb-0 font-size-14">Designer, New York</p>
-                                    </div>
-                                </div>
-                            </div><!-- end cardbody -->
-                        </div><!-- end card -->
-                    </div>
-                    <!-- end col -->
+                    <?php foreach($awards as $award){
+                        awardCard($award);
+                    }; ?>
                 </div>
                 <!-- end row -->
             </div>
             <!-- end container -->
         </section>
         <!-- Blog end -->
-
-        <!-- CTA start -->
-        <section class="section bg-center w-100 bg-light" style="background-image: url(images/cta-bg.png);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card bg-gradient-primary text-center border-0">
-                            <div class="bg-overlay-img" style="background-image: url(images/demos.png);"></div>
-                            <div class="card-body mx-auto p-sm-5 p-4">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-10">
-                                        <div class="p-3">
-                                            <h2 class="text-white mb-4">Join our Growing Community</h2>
-                                            <p class="text-white-70 font-size-16 mb-4 pb-3">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                            <a href="javascript: void(0);" class="btn btn-light rounded-pill">Sign Up for free</a>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-                            </div>
-                            <!-- end cardbody -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- CTA end -->
-
         <!-- Footer Start -->
         <footer class="footer" style="background-image: url(images/footer-bg.png);">
             <div class="container">
