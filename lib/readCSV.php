@@ -12,19 +12,7 @@ function readCSV($fileIn) {
     $header = fgetcsv($file);
     $data = [];
 
-    while ($row = fgetcsv($file)) {
-        $data[] = array_combine($header, $row);
-    }
-
     fclose($file);
     return $data;
-}
-
-$csvFile = "";
-$data = readCSV($csvFile);
-if (!is_array($data)) {
-    echo $data;
-} else {
-    print_r($data);
 }
 ?>
