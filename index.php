@@ -1,3 +1,10 @@
+<?php
+    require_once('./lib/readPlain.php');
+    require_once('./lib/readJSON.php');
+    require_once('./lib/readCSV.php');
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
