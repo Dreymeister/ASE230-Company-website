@@ -14,11 +14,4 @@ function readPlain($fileIn) {
         return null;
     }
 }
-
-$textFile = "";
-$data = readPlain($textFile);
-
-if ($data !== null) {
-    echo $data;
-}
 ?>

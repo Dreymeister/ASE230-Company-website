@@ -14,11 +14,4 @@ function readJSON($fileIn) {
 
     return $jsonData;
 }
-
-$jsonFile = "";
-$data = readJSON($jsonFile);
-
-if ($data !== null) {
-    print_r($data);
-}
 ?>

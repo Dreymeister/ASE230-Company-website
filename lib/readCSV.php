@@ -9,22 +9,17 @@ function readCSV($fileIn) {
         return "ERROR - Unable to open CSV file: $fileIn";
     }
 
-    $header = fgetcsv($file);
+    $delimeter = ';';
+    $header = fgetcsv($file, 0, $delimeter);
     $data = [];
 
-    while ($row = fgetcsv($file)) {
-        $data[] = array_combine($header, $row);
+    while ($row = fgetcsv($file, 0, $delimeter)) {
+        if (count($header) === count($row)) {
+            $data[] = array_combine($header, $row);
+        }
     }
 
     fclose($file);
     return $data;
-}
-
-$csvFile = "";
-$data = readCSV($csvFile);
-if (!is_array($data)) {
-    echo $data;
-} else {
-    print_r($data);
 }
 ?>
