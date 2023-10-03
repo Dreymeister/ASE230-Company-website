@@ -5,7 +5,6 @@
    File Description: Main js file
 */
 
-//lol
 
 
 //  Window scroll sticky class add
