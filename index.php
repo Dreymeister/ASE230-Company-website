@@ -5,10 +5,9 @@
 
     $overview = readPlain('./data/overview.txt');
     $missionStatement = readPlain('./data/mission.txt');
-    $team = readCSV('./data/team.csv');
-    $json = readJSON('./data/data.json');
-    $awards = $json['awards'];
-    $products = $json['products'];
+    $team = readJSON('./data/team.json');
+    $awards = readJSON('./data/awards.json');
+    $products = readJSON('./data/products.json');
     $count = 0;
 
     function leftProduct($productName, $productData){
@@ -65,12 +64,12 @@
                         <!-- end row -->';
     }
 
-    function memberCard($memberArr){
+    function memberCard($memberName, $memberArr){
         echo '
                     <div class="col-lg-4 col-sm-6">
                         <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
                             <div class="position-relative overflow-hidden">
-                                <img src="'.$memberArr['img'].'" alt="" class="img-fluid d-block mx-auto" />
+                                <img src="./'.$memberArr['image'].'" alt="" class="img-fluid d-block mx-auto" />
                                 <ul class="list-inline p-3 mb-0 team-social-item">
                                     <li class="list-inline-item mx-3">
                                         <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
@@ -84,7 +83,7 @@
                                 </ul>
                             </div>
                             <div class="p-4">
-                                <h5 class="font-size-19 mb-1">'.$memberArr['name'].'</h5>
+                                <h5 class="font-size-19 mb-1">'.$memberName.'</h5>
                                 <p class="text-secondary text-uppercase font-size-14 mb-0">'.$memberArr['role'].'</p>
                                 <p class="text-muted small">'.$memberArr['description'].'</p>
                             </div>
@@ -230,8 +229,8 @@
                 </div>
                 <!-- end row -->
                 <div class="row justify-content-center">
-                <?php foreach($team as $member){
-                    memberCard($member);
+                <?php foreach($team as $member => $details){
+                    memberCard($member, $details);
                 };?>
                 </div>
                 <!-- end row -->

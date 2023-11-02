@@ -1,0 +1,27 @@
+{
+    "Capt. Helena Vance": {
+        "role": "Founder & CEO",
+        "description": "A former astronaut and a propulsion physicist, Capt. Vance brings unparalleled expertise and vision to Orion, leading the team towards uncharted territories.",
+        "image": "images\/team\/Capt. Helena Vance.jpg"
+    },
+    "Dr. Hiroshi Nakamura": {
+        "role": "CTO",
+        "description": "A genius in aerospace engineering, Dr. Nakamura's innovations form the backbone of Orion's groundbreaking spacecrafts and aerial vehicles.",
+        "image": "images\/team\/Dr. Hiroshi Nakamura.jpg"
+    },
+    "Leo Rodriguez": {
+        "role": "Chief of Design",
+        "description": "With a penchant for blending aesthetics with functionality, Leo ensures that every Orion product is not just effective but also a piece of art.",
+        "image": "images\/team\/Leo Rodriguez.jpg"
+    },
+    "Ava O'Connell": {
+        "role": "VP of Operations",
+        "description": "Managing the intricate logistics of aerospace projects is Ava's forte. Her meticulous planning ensures that missions are executed flawlessly.",
+        "image": "images\/team\/Ava O'Connell.jpg"
+    },
+    "Dr. Imani Okoro": {
+        "role": "Head of AeroAcademy\u2122",
+        "description": "A space historian and a former NASA educator, Dr. Okoro shapes the curriculum, ensuring that the academy produces the best minds in aerospace.",
+        "image": "images\/team\/Dr. Imani Okoro.jpg"
+    }
+}

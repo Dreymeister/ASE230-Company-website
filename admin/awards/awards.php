@@ -1,66 +1,40 @@
 <?php
-function readCsvFile($csvFileName) {
-    $awardsArray = [];
 
-    if (file_exists($csvFileName)) {
-        $csvData = file($csvFileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-        foreach ($csvData as $line) {
-            $award = str_getcsv($line);
-            $awardsArray[] = $award;
-        }
-    }
-
-    return $awardsArray;
+function deleteAward($awardName) {
+    $awards = getAwards();
+    unset($awards[$awardName]);
+    $awardsJson = json_encode($awards, JSON_PRETTY_PRINT);
+    file_put_contents('../../data/awards.json', $awardsJson);
 }
 
-function writeCsvFile($csvFileName, $awardsArray) {
-    $csvOutput = '';
-
-    foreach ($awardsArray as $award) {
-        $csvOutput .= '"' . implode('","', $award) . '"' . PHP_EOL;
-    }
-
-    return file_put_contents($csvFileName, $csvOutput) !== false;
+function getAwards() {
+    $awardsJson = file_get_contents('../../data/awards.json');
+    $awards = json_decode($awardsJson, true);
+    return $awards;
 }
 
-function addOrUpdateAward($csvFileName, $awardName, $awardDescription) {
-    $awardsArray = readCsvFile($csvFileName);
-    $updated = false;
-
-    foreach ($awardsArray as &$award) {
-        if ($award[0] === $awardName) {
-            $award[1] = $awardDescription;
-            $updated = true;
-            break;
-        }
-    }
-
-    if (!$updated) {
-        $awardsArray[] = [$awardName, $awardDescription];
-    }
-
-    return writeCsvFile($csvFileName, $awardsArray);
+function getAward($awardName) {
+    $awards = getawards();
+    return $awards[$awardName];
 }
 
-function deleteAward($csvFileName, $awardName) {
-    $awardsArray = readCsvFile($csvFileName);
-
-    foreach ($awardsArray as $key => $award) {
-        if ($award[0] === $awardName) {
-            unset($awardsArray[$key]);
-            break;
-        }
+function tableRowAwards($awards) {
+    foreach($awards as $award => $details){
+        echo '<tr style="border: 1px solid black; border-collapse: collapse;">
+            <td style="border: 1px solid black; border-collapse: collapse;">' . $award . '</td>
+            <td style="border: 1px solid black; border-collapse: collapse;">' . $details['year'] . '</td>
+            <td style="border: 1px solid black; border-collapse: collapse;"><a href="detail.php?id=' . $award . '">Details</a></td>
+            </tr>';
     }
-
-    return writeCsvFile($csvFileName, $awardsArray);
 }
 
-function addNewAward($csvFileName, $name, $description) {
-    $newAward = [$name, $description];
-    $awardsArray = readCsvFile($csvFileName);
-    $awardsArray[] = $newAward;
-
-    return writeCsvFile($csvFileName, $awardsArray);
+function updateAwards($post){
+    $awards = getAwards();
+    $awards[$post['awardName']] = [
+        'year' => $post['year'],
+        'description' => $post['description'],
+    ];
+    $awardsJson = json_encode($awards, JSON_PRETTY_PRINT);
+    file_put_contents('../../data/awards.json', $awardsJson);
 }
 ?>

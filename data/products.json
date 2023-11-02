@@ -1,0 +1,30 @@
+{
+    "Galactic Cruiser\u2122": {
+        "description": "An innovative spacecraft designed for deep space exploration, equipped with advanced life support systems and AI-driven navigation.",
+        "applications": {
+            "Stellar Drive Propulsion": "A proprietary system that allows the Cruiser to achieve faster-than-ever travel speeds, reducing interplanetary journey times.",
+            "Holodeck Entertainment": "A VR-based entertainment zone that simulates Earthly experiences, ensuring mental well-being during long space journeys."
+        }
+    },
+    "SkySailor Drones\u2122": {
+        "description": "Environmentally-friendly drones powered by solar and wind energy, suitable for both recreational and professional use.",
+        "applications": {
+            "Eco-Cam Tech": "Advanced camera systems that can monitor ecosystems with minimal intrusion.",
+            "Infinite Flight Mode": "Leveraging solar and wind energy, these drones can stay airborne for significantly extended periods compared to conventional drones"
+        }
+    },
+    "Nebula Stations\u2122": {
+        "description": "Modular space habitats intended for research, tourism, and potential future colonization efforts.",
+        "applications": {
+            "Bio-Dome Agriculture": "State-of-the-art agricultural domes that simulate Earth's conditions, allowing fresh produce growth in space.",
+            "Gravity Pods": "Areas within the station that can simulate varying levels of gravity, from Earth-like conditions to zero-G zones."
+        }
+    },
+    "AeroAcademy\u2122": {
+        "description": "An immersive training institution offering programs in aerospace engineering, astronaut training, and space tourism orientation.",
+        "applications": {
+            "Virtual Spacewalks": "Training sessions in VR that prepare astronauts for extravehicular activities",
+            "Intergalactic Culture Modules": "Courses that introduce students to the speculated cultures and societal structures of potential extraterrestrial civilizations."
+        }
+    }
+}

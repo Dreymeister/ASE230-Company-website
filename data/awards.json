@@ -1,0 +1,18 @@
+{
+    "award1": {
+        "year": "2023",
+        "description": "Secured \"Aerospace Company of the Decade\" title by Aviation Weekly"
+    },
+    "award2": {
+        "year": "2022",
+        "description": "Successfully launched three Galactic Cruiser\u2122 missions to Mars, paving the way for potential human settlements."
+    },
+    "award3": {
+        "year": "2021",
+        "description": "SkySailor Drones\u2122 adopted by leading ecological researchers for environmental monitoring without carbon footprints."
+    },
+    "award4": {
+        "year": "2021",
+        "description": "Partnership with NASA and SpaceX for the development of next-generation propulsion technologies."
+    }
+}
