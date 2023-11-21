@@ -37,13 +37,13 @@ require_once('./pages.php');
                 </tr>
             </thead>
             <tbody>
-                <?php foreach (getPageInfo($dirPath) as $file) : ?>
+                <?php foreach (Pages::getPageInfo($dirPath) as $file) : ?>
                     <tr>
-                        <td><a href="detail.php?file=<?= $file[0] ?>"><?= $file[0] ?></a></td>
-                        <td><?= htmlspecialchars(getFirstWordsFromFile($dirPath . '/' . $file[0])) ?></td>
+                        <td><a href="detail.php?file=<?= $file->getName() ?>"><?= $file->getName() ?></a></td>
+                        <td><?= htmlspecialchars(getFirstWordsFromFile($dirPath . '/' . $file->getName())) ?></td>
                         <td>
-                            <a href="edit.php?file=<?= $file[0] ?>" class="btn btn-primary">Edit</a>
-                            <a href="delete.php?file=<?= urlencode($file[0]) ?>" class="btn btn-danger">Delete</a>
+                            <a href="edit.php?file=<?= $file->getName() ?>" class="btn btn-primary">Edit</a>
+                            <a href="delete.php?file=<?= urlencode($file->getName()) ?>" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -57,3 +57,4 @@ require_once('./pages.php');
 </body>
 
 </html>
+

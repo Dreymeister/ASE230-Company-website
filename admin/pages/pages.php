@@ -5,108 +5,169 @@ class Page {
     private $pageContent;
 
     public function __construct($pageName, $pageContent) {
-        $this->setName($pageName);
-        $this->setContent($pageContent);
+        $this->pageName = $pageName;
+        $this->pageContent = $pageContent;
     }
 
-    public function setName($name) {
-        $this->pageName = $name;
+    public function getName() {
+        return $this->pageName;
     }
 
-    public function setContent($content) {
-        $this->pageContent = $content;
+    public function getContent() {
+        return $this->pageContent;
     }
 
     public function printPage() {
-        echo '<tr><td><a href="./detail.php?file=' . urlencode($this->pageName) . '">' . $this->pageName . '</a></td><td>' . $this->pageContent . '</td></tr>';
+        echo '
+        <tr>
+            <td><a href="./detail.php?file=' . urlencode($this->pageName) . '">' . $this->pageName . '</a></td>
+            <td>' . $this->pageContent . '</td>
+        </tr>
+        ';
     }
 }
 
-class PagesManager {
-    private $dirPath;
+class Pages {
+    public static function getPageInfo($dir_path) {
+        $files = [];
 
-    public function __construct($dirPath) {
-        $this->dirPath = $dirPath;
-    }
+        $dir_handle = opendir($dir_path);
 
-    public function getPageInfo() {
-        $pages = [];
-        $dirHandle = opendir($this->dirPath);
+        if ($dir_handle) {
+            while (false !== ($filename = readdir($dir_handle))) {
+                $file_path = $dir_path . "/" . $filename;
 
-        if ($dirHandle) {
-            while (false !== ($filename = readdir($dirHandle))) {
-                $filePath = $this->dirPath . "/" . $filename;
-
-                if (is_file($filePath)) {
-                    $contents = file_get_contents($filePath);
-                    $pages[] = new Page($filename, $contents);
+                if (is_file($file_path)) {
+                    $contents = file_get_contents($file_path);
+                    $files[] = new Page($filename, $contents);
                 }
             }
 
-            closedir($dirHandle);
+            closedir($dir_handle);
         } else {
             echo "Failed to open directory!";
         }
-
-        return $pages;
+        return $files;
     }
 
-    public function getPageContent($fileName) {
-        $filePath = $this->dirPath . "/" . $fileName;
+    public static function getPageContent($dir_path, $fileName) {
+        $file_path = $dir_path . "/" . $fileName;
 
-        if (is_file($filePath)) {
-            return file_get_contents($filePath);
+        if (is_file($file_path)) {
+            $pageContent = file_get_contents($file_path);
+            return $pageContent;
         } else {
             return null;
         }
     }
 
-    public function addNewPage($filename, $contents) {
+    public static function addNewPage($pagesDir, $filename, $contents) {
         if (!empty($filename) && !empty($contents)) {
-            $filePath = $this->dirPath . "/" . $filename;
+            $file_path = $pagesDir . "/" . $filename;
 
-            if (file_put_contents($filePath, $contents) !== false) {
+            if (file_put_contents($file_path, $contents) !== false) {
                 return true;
             }
         }
-
         return false;
     }
 
-    public function deleteFile($fileName) {
-        $filePath = $this->dirPath . "/" . $fileName;
-
-        if (file_exists($filePath)) {
-            return unlink($filePath);
+    public static function deleteFile($txtFileName) {
+        if (file_exists($txtFileName)) {
+            return unlink($txtFileName);
         }
-
         return false;
     }
 }
 
-class PageRenderer {
-    public static function createTable($headings, $pages) {
-        echo '<div class="container-fluid"><table class="table" style="width: 90%; margin: auto;"><thead><tr>';
+function createTable($headings, $files) {
+    echo '
+    <div class="container-fluid">
+        <table class="table" style="width: 90%; margin: auto;">
+            <thead>
+                <tr>
+    ';
+    foreach ($headings as $key => $heading) {
+        echo '
+            <th>' . $heading . '</th>
+        ';
+    }
+    echo '
+                </tr>
+            </thead>
+            <tbody>
+    ';
+    foreach ($files as $key => $file) {
+        $file->printPage();
+    }
+    echo '
+            </tbody>
+        </table>
+    </div>
+    ';
+}
 
-        foreach ($headings as $key => $heading) {
-            echo '<th>' . $heading . '</th>';
+function deleteTxtFileContents($txtFileName) {
+    $file = fopen($txtFileName, 'w');
+    fclose($file);
+}
+
+function getFirstWordsFromFile($txtFileName, $numWords = 10) {
+    $content = file_get_contents($txtFileName);
+    $words = preg_split('/\s+/', $content, $numWords + 1);
+    return implode(' ', array_slice($words, 0, $numWords));
+}
+
+function editFile($dir_path, $txtFileName) {
+    $files = [];
+
+    $dir_handle = opendir($dir_path);
+
+    if ($dir_handle) {
+        while (false !== ($filename = readdir($dir_handle))) {
+            $file_path = $dir_path . "/" . $filename;
+
+            if (is_file($file_path) and $filename === $txtFileName) {
+                $contents = file_get_contents($file_path);
+                print($contents);
+            }
         }
 
-        echo '</tr></thead><tbody>';
+        closedir($dir_handle);
+    } else {
+        echo "Failed to open directory!";
+    }
+    return $files;
+}
 
-        foreach ($pages as $key => $page) {
-            $page->printPage();
-        }
+function getPageContent($dir_path, $fileName) {
+    $file_path = $dir_path . "/" . $fileName;
 
-        echo '</tbody></table></div>';
+    if (is_file($file_path)) {
+        $pageContent = file_get_contents($file_path);
+        return $pageContent;
+    } else {
+        return null;
     }
 }
 
-$pagesManager = new PagesManager(''); //Pathway needs to be fixed here.
-$pageInfo = $pagesManager->getPageInfo();
+function addNewPage($pagesDir, $filename, $contents) {
+    if (!empty($filename) && !empty($contents)) {
+        $file_path = $pagesDir . "/" . $filename;
 
-PageRenderer::createTable(["Filename", "Contents"], $pageInfo);
+        if (file_put_contents($file_path, $contents) !== false) {
+            return true;
+        }
+    }
+    return false;
+}
 
-
+function deleteFile($txtFileName) {
+    if (file_exists($txtFileName)) {
+        return unlink($txtFileName);
+    }
+    return false;
+}
 
 ?>
+
