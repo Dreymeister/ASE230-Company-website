@@ -7,6 +7,7 @@ echo '<table style="border: 1px solid black; border-collapse: collapse;">
 <th style="border: 1px solid black; border-collapse: collapse;">Details</th>
 </tr>';
 tableRowRequests($requests);
-echo '</table><br />';
+echo '</table><br />
+<a href="../index.php">Back to Admin Portal</a>';
 
 ?>

@@ -8,6 +8,7 @@ echo '<table style="border: 1px solid black; border-collapse: collapse;">
 </tr>';
 tableRowTeam($team);
 echo '</table><br />
-<a href="create.php">Create New Team Member</a>';
+<a href="create.php">Create New Award</a><br />
+<a href="../index.php">Back to Admin Portal</a>';
 
 ?>
