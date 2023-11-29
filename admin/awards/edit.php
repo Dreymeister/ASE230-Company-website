@@ -1,19 +1,20 @@
 <?php 
-require_once('awards.php');
+require_once('../management.php');
+$awardsManager = new EntityManagement('awards');
 if(count($_POST)>0){
-    updateAwards($_POST);
-    header('Location: detail.php?id='.$_POST['awardName']);
+    $awardsManager->updateEntity($_POST);
+    header('Location: detail.php?id='.$_POST['awardsName']);
 } else {
-$awards = getAwards();
-$awardName = $_GET['id'];
-$award = getAward($awardName);
+
+$awardsName = $_GET['id'];
+$award = $awardsManager->getEntity($awardsName);
 
 ?>
 
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
     <div>
         <label>Award Name</label><br />
-        <input type="text" name="awardName" value="<?= $awardName ?>"/> <br />
+        <input type="text" name="awardsName" value="<?= $awardsName ?>"/> <br />
     </div>
     <br />
     <div>
@@ -32,7 +33,7 @@ $award = getAward($awardName);
 </form>
 
 <footer>
-    <br /><a href="detail.php?id=<?= $awardName ?>">Back to Details</a>
+    <br /><a href="detail.php?id=<?= $awardsName ?>">Back to Details</a>
 </footer>
 
 <?php

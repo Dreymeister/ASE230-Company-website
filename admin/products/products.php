@@ -1,8 +1,8 @@
 <?php
 
-function deleteProduct($productName) {
+function deleteProduct($productsName) {
     $products = getProducts();
-    unset($products[$productName]);
+    unset($products[$productsName]);
     $productsJson = json_encode($products, JSON_PRETTY_PRINT);
     file_put_contents('../../data/products.json', $productsJson);
 }
@@ -13,9 +13,9 @@ function getProducts() {
     return $products;
 }
 
-function getProduct($productName) {
+function getProduct($productsName) {
     $products = getProducts();
-    return $products[$productName];
+    return $products[$productsName];
 }
 
 function tableRowProducts($products) {
@@ -29,7 +29,7 @@ function tableRowProducts($products) {
 
 function updateProducts($post){
     $products = getProducts();
-    $products[$post['productName']] = [
+    $products[$post['productsName']] = [
         'description' => $post['description'],
         'applications' => [
             $post['app1Name'] => $post['app1Description'],

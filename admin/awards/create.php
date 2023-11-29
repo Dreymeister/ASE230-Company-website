@@ -1,7 +1,8 @@
 <?php
-require_once('awards.php');
+require_once('../management.php');
+$awardsManager = new EntityManagement('awards');
 if(count($_POST)>0){
-    updateAwards($_POST);
+    $awardsManager->updateEntity($_POST);
     header('Location: index.php');
 } else {
 ?>
@@ -9,7 +10,7 @@ if(count($_POST)>0){
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
     <div>
         <label>Award Name</label><br />
-        <input type="text" name="awardName" /> <br />
+        <input type="text" name="awardsName" /> <br />
     </div>
     <br />
     <div>

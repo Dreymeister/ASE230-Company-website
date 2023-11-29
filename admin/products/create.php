@@ -1,7 +1,8 @@
 <?php
-require_once('products.php');
+require_once('../management.php');
+$productsManager = new EntityManagement('products');
 if(count($_POST)>0){
-    updateProducts($_POST);
+    $productsManager->updateEntity($_POST);
     header('Location: index.php');
 } else {
 ?>
@@ -9,7 +10,7 @@ if(count($_POST)>0){
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
     <div>
         <label>Product Name</label><br />
-        <input type="text" name="productName" /> <br />
+        <input type="text" name="productsName" /> <br />
     </div>
     <div>
         <label>Description</label><br />

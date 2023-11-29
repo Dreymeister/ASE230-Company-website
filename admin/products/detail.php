@@ -1,11 +1,13 @@
 <?php
-require_once('products.php');
-$productName = $_GET['id'];
-$product = getProduct($productName);
+require_once('../management.php');
+$productsManager = new EntityManagement('products');
+
+$productsName = $_GET['id'];
+$product = $productsManager->getEntity($productsName);
 ?>
 
 <h1>Product Details</h1>
-<h2><?php echo $productName; ?></h2>
+<h2><?php echo $productsName; ?></h2>
 <p><?php echo $product['description']; ?></p>
 <h3>Applications</h3>
 <ul>
@@ -16,8 +18,8 @@ foreach($product['applications'] as $application => $description){
 ?>
 </ul>
 
-<a href="edit.php?id=<?php echo $productName; ?>"><button>Edit</button></a> &nbsp;
-<a href="delete.php?id=<?php echo $productName; ?>"><button>Delete</button></a>
+<a href="edit.php?id=<?php echo $productsName; ?>"><button>Edit</button></a> &nbsp;
+<a href="delete.php?id=<?php echo $productsName; ?>"><button>Delete</button></a>
 
 <footer>
     <br /><a href="index.php">Back to List</a>
