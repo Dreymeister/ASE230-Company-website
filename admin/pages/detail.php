@@ -1,50 +1,17 @@
 <?php
-$dirPath = "../../data/pages";
-require_once('./pages.php');
-
-if (isset($_GET['file'])) {
-    $fileName = $_GET['file'];
-    $pageContent = getPageContent($dirPath, $fileName);
-
-    if (!$pageContent) {
-        echo "Page not found.";
-        exit;
-    }
-} else {
-    echo "No page specified.";
-    exit();
-}
+require_once('pages.php');
+$pageName = $_GET['id'];
+$pageContents = getPage($pageName);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<h1>Page Details</h1>
+<h2>File Name: <?php echo $pageName; ?></h2>
+<h3>Page Contents:</h3>
+<p><?php echo $pageContents ?></p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $fileName ?> Details</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<a href="edit.php?id=<?php echo $pageName; ?>"><button>Edit</button></a> &nbsp;
+<a href="delete.php?id=<?php echo $pageName; ?>"><button>Delete</button></a>
 
-<body>
-    <div class="text-center mt-4">
-        <a href="edit.php?file=<?= $_GET["file"] ?>" class="btn btn-primary button-margin">Edit</a>
-    </div>
-    <div class="text-center mt-4">
-        <a href="delete.php?file=<?= urlencode($fileName) ?>" class="btn btn-danger button-margin">Delete</a>
-    </div>
-    <div class="container">
-        <h1><?= $fileName ?> Details</h1>
-        <div>
-            <h2>Page Contents:</h2>
-            <pre><?= htmlspecialchars($pageContent) ?></pre>
-        </div>
-        <a href="index.php">Back to Pages</a>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+<footer>
+    <br /><a href="index.php">Back to List</a>
+</footer>

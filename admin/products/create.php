@@ -13,7 +13,7 @@ if(count($_POST)>0){
     </div>
     <div>
         <label>Description</label><br />
-        <input name="description"></textarea><br />
+        <input name="description" /><br />
     </div>
     <br />
     <div>

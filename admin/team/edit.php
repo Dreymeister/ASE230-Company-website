@@ -21,7 +21,7 @@ $member = getMember($memberName);
     </div>
     <div>
         <label>Description</label><br />
-        <input type="text" name="description" value="<?= $member['description'] ?>"></textarea><br />
+        <input type="text" name="description" value="<?= $member['description'] ?>" /><br />
     </div>
     <br />
     <div>

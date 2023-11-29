@@ -18,7 +18,7 @@ $keys = array_keys($product['applications']);
     </div>
     <div>
         <label>Description</label><br />
-        <input name="description" value="<?= $product['description'] ?>"></textarea><br />
+        <input name="description" value="<?= $product['description'] ?>" /><br />
     </div>
     <br />
     <div>
